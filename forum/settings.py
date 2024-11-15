@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_URL, LOGOUT_REDIRECT_URL
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'utopic',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +124,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'utopic.User'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'personal_account'
+LOGOUT_REDIRECT_URL = 'login'
+
+STATIC_URL = '/static/'
+
+# Directories where static files will be collected from during `collectstatic`
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # This is where you can put your custom static files
+]

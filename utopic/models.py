@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class Role(models.Model):
@@ -6,12 +7,14 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-class User(models.Model):
+class User(AbstractUser):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=64)
     created_at = models.DateTimeField(auto_now_add=True)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
+
+
 
     def __str__(self):
         return self.name
@@ -31,6 +34,11 @@ class Report(models.Model):
     table_name = models.CharField(max_length=30)
     table_pk = models.IntegerField()
 
+class Attachment(models.Model):
+    file = models.FileField(upload_to='attachments/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 class Publication(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     forum = models.ForeignKey('Forum', on_delete=models.SET_NULL, null=True)
@@ -49,10 +57,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(null=True)
     deleted_at = models.DateTimeField(null=True)
 
-class Attachment(models.Model):
-    file = models.FileField(upload_to='attachments/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 
 class Team(models.Model):
     name = models.CharField(max_length=50)

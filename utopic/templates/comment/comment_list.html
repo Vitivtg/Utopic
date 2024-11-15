@@ -1,0 +1,13 @@
+{% extends 'utopic/base.html' %}
+{% block content %}
+<h2>Comments</h2>
+<ul>
+  {% for comment in object_list %}
+  <li>
+    <a href="{% url 'comment_detail' comment.pk %}">{{ comment.publication }} {{ comment.user }} {{ comment.text }}</a>
+    <a href="{% url 'comment_edit' comment.pk %}">Edit</a>
+    <a href="{% url 'comment_delete' comment.pk %}">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

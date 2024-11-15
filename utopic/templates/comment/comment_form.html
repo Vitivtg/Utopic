@@ -1,0 +1,10 @@
+{% extends 'utopic/base.html' %}
+{% block content %}
+<h2>{{ view.action }} Comment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'comment_list' %}">Back</a>
+{% endblock %}

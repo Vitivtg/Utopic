@@ -1,0 +1,13 @@
+{% extends 'utopic/base.html' %}
+{% block content %}
+<h2> {{ comment.publication }} {{ comment.user }}</h2>
+<p><strong>Publication:</strong> {{ comment.publication }}</p>
+<p><strong>User:</strong> {{ comment.user }}</p>
+<p><strong>Text:</strong> {{ comment.text }}</p>
+<p><strong>Created:</strong> {{ comment.created_at }}</p>
+<p><strong>Updated:</strong> {{ comment.updated_at }}</p>
+<p><strong>Deleted:</strong> {{ comment.deleted_at }}</p>
+<a href="{% url 'comment_edit' comment.pk %}">Edit</a>
+<a href="{% url 'comment_delete' comment.pk %}">Delete</a>
+<a href="{% url 'comment_list' %}">Back to list</a>
+{% endblock %}

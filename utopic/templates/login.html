@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utopic Forum - Login</title>
+    <link rel="stylesheet" href='../static/styles/login.css'>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <a href="/" class="logo-link">Utopic</a>
+            {% load static %}
+            <img src="{% static 'media/bg_login.png' %}" alt="Background Image">
+            <div class="text">
+                <h1>Connect, share, and grow together</h1>
+                <div class="column-container">
+                    <ul>
+                        <li>🌐 <strong>Join a Global Community</strong><br>Discuss ideas and create something great.</li>
+                        <li>🔍 <strong>Explore Topics that Matter</strong><br>Discover topics from tech to self-growth.</li>
+                        <li>💬 <strong>Engage in Meaningful Conversations</strong><br>Join discussions where every voice matters.</li>
+                    </ul>
+                    <ul>
+                        <li>🌱 <strong>Grow Your Knowledge and Network</strong><br>Find inspiration and expand your circle.</li>
+                        <li>💡 <strong>Share Your Insights</strong><br>Post ideas to help others improve.</li>
+                        <li>🔒 <strong>Safe and Supportive Environment</strong><br>Engage in a welcoming space built for all.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-container">
+            <h2>Log in to your account</h2>
+            {% if login_error %}
+                <p style="color: red;">{{ login_error }}</p>
+            {% endif %}
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+            <a href="{% url 'register' %}" class="signup-link">Sign up</a>
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+    </div>
+</body>
+</html>
